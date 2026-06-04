@@ -35,7 +35,7 @@ export function Header() {
         </button>
 
         <nav className="hidden md:flex items-center gap-10 text-[12px] font-medium tracking-[0.18em] uppercase">
-          {collections.slice(0, 5).map((c) => (
+          {collections.slice(0, 4).map((c) => (
             <Link
               key={c.slug}
               to="/colecao/$slug"
@@ -46,6 +46,13 @@ export function Header() {
               {c.name}
             </Link>
           ))}
+          <Link
+            to="/estilo"
+            className="link-underline text-olive hover:text-foreground transition-colors"
+            activeProps={{ className: "text-foreground" }}
+          >
+            SCORSATTO AI
+          </Link>
         </nav>
 
         <Link
@@ -96,6 +103,20 @@ export function Header() {
                 {c.name}
               </Link>
             ))}
+            <Link
+              to="/estilo"
+              onClick={() => setMenuOpen(false)}
+              className="font-serif text-4xl text-olive"
+            >
+              SCORSATTO AI
+            </Link>
+            <Link
+              to="/montar-look"
+              onClick={() => setMenuOpen(false)}
+              className="font-serif text-4xl text-olive"
+            >
+              Montar Look
+            </Link>
           </nav>
         </div>
       )}
