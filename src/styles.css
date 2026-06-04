@@ -205,8 +205,6 @@
   font-size: 1.875rem;
   outline: none;
   transition: border-color 300ms;
-}
-@utility serif-input {
   &:focus {
     border-bottom-color: var(--color-foreground);
   }
