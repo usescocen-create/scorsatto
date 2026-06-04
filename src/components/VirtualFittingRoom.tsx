@@ -215,7 +215,7 @@ export function VirtualFittingRoom({ product, open, onClose }: Props) {
                           value={height}
                           onChange={(e) => setHeight(e.target.value.replace(/\D/g, "").slice(0, 3))}
                           placeholder="178"
-                          className="ipt"
+                          className="w-full border-0 border-b border-border bg-transparent pb-3 font-serif text-3xl outline-none focus:border-foreground"
                         />
                       </Field>
                       <Field label="Peso (kg)">
@@ -224,7 +224,7 @@ export function VirtualFittingRoom({ product, open, onClose }: Props) {
                           value={weight}
                           onChange={(e) => setWeight(e.target.value.replace(/\D/g, "").slice(0, 3))}
                           placeholder="76"
-                          className="ipt"
+                          className="w-full border-0 border-b border-border bg-transparent pb-3 font-serif text-3xl outline-none focus:border-foreground"
                         />
                       </Field>
                       <Field label="Idade">
@@ -233,7 +233,7 @@ export function VirtualFittingRoom({ product, open, onClose }: Props) {
                           value={age}
                           onChange={(e) => setAge(e.target.value.replace(/\D/g, "").slice(0, 2))}
                           placeholder="32"
-                          className="ipt"
+                          className="w-full border-0 border-b border-border bg-transparent pb-3 font-serif text-3xl outline-none focus:border-foreground"
                         />
                       </Field>
                     </div>
