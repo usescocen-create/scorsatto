@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MontarLookRouteImport } from './routes/montar-look'
 import { Route as EstiloRouteImport } from './routes/estilo'
 import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 import { Route as ColecaoSlugRouteImport } from './routes/colecao.$slug'
 
+const MontarLookRoute = MontarLookRouteImport.update({
+  id: '/montar-look',
+  path: '/montar-look',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EstiloRoute = EstiloRouteImport.update({
   id: '/estilo',
   path: '/estilo',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
   '/estilo': typeof EstiloRoute
+  '/montar-look': typeof MontarLookRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
   '/estilo': typeof EstiloRoute
+  '/montar-look': typeof MontarLookRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -60,19 +68,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
   '/estilo': typeof EstiloRoute
+  '/montar-look': typeof MontarLookRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/carrinho' | '/estilo' | '/colecao/$slug' | '/produto/$slug'
+  fullPaths:
+    | '/'
+    | '/carrinho'
+    | '/estilo'
+    | '/montar-look'
+    | '/colecao/$slug'
+    | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/carrinho' | '/estilo' | '/colecao/$slug' | '/produto/$slug'
+  to:
+    | '/'
+    | '/carrinho'
+    | '/estilo'
+    | '/montar-look'
+    | '/colecao/$slug'
+    | '/produto/$slug'
   id:
     | '__root__'
     | '/'
     | '/carrinho'
     | '/estilo'
+    | '/montar-look'
     | '/colecao/$slug'
     | '/produto/$slug'
   fileRoutesById: FileRoutesById
@@ -81,12 +103,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CarrinhoRoute: typeof CarrinhoRoute
   EstiloRoute: typeof EstiloRoute
+  MontarLookRoute: typeof MontarLookRoute
   ColecaoSlugRoute: typeof ColecaoSlugRoute
   ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/montar-look': {
+      id: '/montar-look'
+      path: '/montar-look'
+      fullPath: '/montar-look'
+      preLoaderRoute: typeof MontarLookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/estilo': {
       id: '/estilo'
       path: '/estilo'
@@ -129,6 +159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CarrinhoRoute: CarrinhoRoute,
   EstiloRoute: EstiloRoute,
+  MontarLookRoute: MontarLookRoute,
   ColecaoSlugRoute: ColecaoSlugRoute,
   ProdutoSlugRoute: ProdutoSlugRoute,
 }
