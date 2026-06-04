@@ -95,6 +95,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "SCORSATTO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "SCORSATTO — O básico, elevado." },
+      { name: "description", content: "SCORSATTO." },
+      { property: "og:description", content: "SCORSATTO." },
+      { name: "twitter:description", content: "SCORSATTO." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/78537e01-c9f8-4955-9b3d-6e17477dae1d/id-preview-74eedd6a--69562ad8-b1e7-4b57-b593-da2514c5d232.lovable.app-1780542685173.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/78537e01-c9f8-4955-9b3d-6e17477dae1d/id-preview-74eedd6a--69562ad8-b1e7-4b57-b593-da2514c5d232.lovable.app-1780542685173.png" },
     ],
     links: [
       {
