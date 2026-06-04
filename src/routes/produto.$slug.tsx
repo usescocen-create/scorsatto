@@ -10,6 +10,7 @@ import {
 import { useCart } from "@/stores/cart";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeIn } from "@/components/FadeIn";
+import { VirtualFittingRoom } from "@/components/VirtualFittingRoom";
 
 export const Route = createFileRoute("/produto/$slug")({
   loader: ({ params }) => {
@@ -75,6 +76,7 @@ function ProductPage() {
   const addItem = useCart((s) => s.addItem);
   const [size, setSize] = useState<string | null>(null);
   const [openSection, setOpenSection] = useState<string | null>("composition");
+  const [fittingOpen, setFittingOpen] = useState(false);
 
   const handleAdd = () => {
     if (!size) return;
@@ -187,6 +189,14 @@ function ProductPage() {
                 {size ? "Adicionar à sacola" : "Selecione um tamanho"}
               </button>
 
+              <button
+                onClick={() => setFittingOpen(true)}
+                className="mt-3 flex w-full items-center justify-center gap-3 border border-border py-4 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors hover:border-foreground"
+              >
+                <span className="h-[6px] w-[6px] rounded-full bg-olive" />
+                Experimentar virtualmente
+              </button>
+
               <div className="mt-8 border-y border-border py-5">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-olive">
                   ✦ Selecionado pela curadoria SCORSATTO
@@ -247,6 +257,12 @@ function ProductPage() {
           </div>
         </section>
       )}
+
+      <VirtualFittingRoom
+        product={product}
+        open={fittingOpen}
+        onClose={() => setFittingOpen(false)}
+      />
     </>
   );
 }
