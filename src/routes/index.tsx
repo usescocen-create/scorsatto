@@ -269,6 +269,69 @@ function Index() {
           </FadeIn>
         </div>
       </section>
+
+      {/* SCORSATTO AI */}
+      <section className="bg-ink py-32 text-background md:py-48">
+        <div className="mx-auto grid max-w-[1400px] gap-16 px-6 md:grid-cols-12 md:px-10">
+          <div className="md:col-span-7">
+            <FadeIn>
+              <p className="eyebrow text-background/60">SCORSATTO AI</p>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <h2 className="mt-8 font-serif text-4xl leading-[1.02] tracking-tight md:text-7xl">
+                Inteligência aplicada
+                <br />
+                <em className="font-light italic">ao estilo.</em>
+              </h2>
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <p className="mt-10 max-w-lg text-base leading-relaxed text-background/70">
+                Identificamos seu perfil, compomos seu guarda-roupa e
+                montamos looks completos. Curadoria humana. Precisão
+                de máquina.
+              </p>
+            </FadeIn>
+          </div>
+          <div className="md:col-span-5 md:pt-4">
+            <FadeIn delay={0.2}>
+              <div className="space-y-px border border-background/15">
+                <Link
+                  to="/estilo"
+                  className="group flex items-center justify-between gap-6 border-b border-background/15 p-8 transition-colors hover:bg-background/5"
+                >
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">
+                      Assistente
+                    </p>
+                    <p className="mt-2 font-serif text-2xl">
+                      Descobrir meu estilo
+                    </p>
+                  </div>
+                  <span className="text-3xl text-olive transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+                <Link
+                  to="/montar-look"
+                  className="group flex items-center justify-between gap-6 p-8 transition-colors hover:bg-background/5"
+                >
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">
+                      Outfit Generator
+                    </p>
+                    <p className="mt-2 font-serif text-2xl">
+                      Montar look
+                    </p>
+                  </div>
+                  <span className="text-3xl text-olive transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
