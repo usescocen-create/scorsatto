@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { CartDrawer } from "@/components/CartDrawer";
 
 function NotFoundComponent() {
   return (
@@ -77,19 +80,39 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "SCORSATTO — O básico, elevado." },
+      {
+        name: "description",
+        content:
+          "Moda masculina premium. Peças essenciais selecionadas para homens que valorizam qualidade, presença e simplicidade.",
+      },
+      { name: "author", content: "SCORSATTO" },
+      { property: "og:title", content: "SCORSATTO — O básico, elevado." },
+      {
+        property: "og:description",
+        content: "Moda masculina premium. Quiet luxury. Curadoria SCORSATTO.",
+      },
+      { property: "og:site_name", content: "SCORSATTO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "SCORSATTO",
+          slogan: "O básico, elevado.",
+          description:
+            "Marca premium de moda masculina. Quiet luxury, curadoria essencial.",
+        }),
       },
     ],
   }),
@@ -118,8 +141,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <Header />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
+      <Footer />
+      <CartDrawer />
     </QueryClientProvider>
   );
 }
