@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as EstiloRouteImport } from './routes/estilo'
 import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 import { Route as ColecaoSlugRouteImport } from './routes/colecao.$slug'
 
+const EstiloRoute = EstiloRouteImport.update({
+  id: '/estilo',
+  path: '/estilo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CarrinhoRoute = CarrinhoRouteImport.update({
   id: '/carrinho',
   path: '/carrinho',
@@ -38,12 +44,14 @@ const ColecaoSlugRoute = ColecaoSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/estilo': typeof EstiloRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/estilo': typeof EstiloRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -51,26 +59,41 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/estilo': typeof EstiloRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/carrinho' | '/colecao/$slug' | '/produto/$slug'
+  fullPaths: '/' | '/carrinho' | '/estilo' | '/colecao/$slug' | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/carrinho' | '/colecao/$slug' | '/produto/$slug'
-  id: '__root__' | '/' | '/carrinho' | '/colecao/$slug' | '/produto/$slug'
+  to: '/' | '/carrinho' | '/estilo' | '/colecao/$slug' | '/produto/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/carrinho'
+    | '/estilo'
+    | '/colecao/$slug'
+    | '/produto/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CarrinhoRoute: typeof CarrinhoRoute
+  EstiloRoute: typeof EstiloRoute
   ColecaoSlugRoute: typeof ColecaoSlugRoute
   ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/estilo': {
+      id: '/estilo'
+      path: '/estilo'
+      fullPath: '/estilo'
+      preLoaderRoute: typeof EstiloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/carrinho': {
       id: '/carrinho'
       path: '/carrinho'
@@ -105,9 +128,20 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CarrinhoRoute: CarrinhoRoute,
+  EstiloRoute: EstiloRoute,
   ColecaoSlugRoute: ColecaoSlugRoute,
   ProdutoSlugRoute: ProdutoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
