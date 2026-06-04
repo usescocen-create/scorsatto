@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { getCollection, collections } from "@/data/collections";
-import { getProductsByCollection } from "@/data/products";
+import { getProductsByCollection, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeIn } from "@/components/FadeIn";
 
@@ -48,7 +48,10 @@ export const Route = createFileRoute("/colecao/$slug")({
 });
 
 function CollectionPage() {
-  const { collection, products } = Route.useLoaderData();
+  const { collection, products } = Route.useLoaderData() as {
+    collection: (typeof collections)[number];
+    products: Product[];
+  };
 
   return (
     <>

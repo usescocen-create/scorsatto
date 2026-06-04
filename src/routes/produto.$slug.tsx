@@ -5,6 +5,7 @@ import {
   getProduct,
   getRelatedProducts,
   formatPrice,
+  type Product,
 } from "@/data/products";
 import { useCart } from "@/stores/cart";
 import { ProductCard } from "@/components/ProductCard";
@@ -67,7 +68,10 @@ export const Route = createFileRoute("/produto/$slug")({
 });
 
 function ProductPage() {
-  const { product, related } = Route.useLoaderData();
+  const { product, related } = Route.useLoaderData() as {
+    product: Product;
+    related: Product[];
+  };
   const addItem = useCart((s) => s.addItem);
   const [size, setSize] = useState<string | null>(null);
   const [openSection, setOpenSection] = useState<string | null>("composition");
