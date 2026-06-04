@@ -99,11 +99,10 @@ function Index() {
               Explorar coleção
             </Link>
             <Link
-              to="/colecao/$slug"
-              params={{ slug: "jaquetas" }}
+              to="/estilo"
               className="link-underline text-[11px] font-medium uppercase tracking-[0.22em] text-background"
             >
-              Novidades
+              Descobrir meu estilo →
             </Link>
           </motion.div>
         </div>
