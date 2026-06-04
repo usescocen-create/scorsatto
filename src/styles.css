@@ -194,3 +194,20 @@
     transform-origin: left center;
   }
 }
+
+@utility serif-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  background: transparent;
+  padding-bottom: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  outline: none;
+  transition: border-color 300ms;
+}
+@utility serif-input {
+  &:focus {
+    border-bottom-color: var(--color-foreground);
+  }
+}
