@@ -7,6 +7,11 @@ import pCalcaPreta from "@/assets/p-calca-preta.jpg";
 import pJaquetaOliva from "@/assets/p-jaqueta-oliva.jpg";
 import pJaquetaPreta from "@/assets/p-jaqueta-preta.jpg";
 import pTricoCreme from "@/assets/p-trico-creme.jpg";
+import pCamisaOxford from "@/assets/p-camisa-oxford.jpg";
+import pMoletom from "@/assets/p-moletom-cinza.jpg";
+import pTenis from "@/assets/p-tenis-branco.jpg";
+import pCinto from "@/assets/p-cinto-preto.jpg";
+import pBermuda from "@/assets/p-bermuda-linho.jpg";
 
 export type Product = {
   slug: string;
@@ -20,6 +25,7 @@ export type Product = {
   description: string;
   composition: string;
   care: string;
+  tags?: string[];
 };
 
 export const products: Product[] = [
