@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { getCollection, collections } from "@/data/collections";
-import { getProductsByCollection, type Product } from "@/data/products";
+import { getProductsByCollection, getProductsByTag, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeIn } from "@/components/FadeIn";
 
@@ -8,7 +8,10 @@ export const Route = createFileRoute("/colecao/$slug")({
   loader: ({ params }) => {
     const collection = getCollection(params.slug);
     if (!collection) throw notFound();
-    return { collection, products: getProductsByCollection(params.slug) };
+    const items = collection.tag
+      ? getProductsByTag(collection.tag)
+      : getProductsByCollection(params.slug);
+    return { collection, products: items };
   },
   head: ({ loaderData }) => {
     const name = loaderData?.collection.name ?? "Coleção";

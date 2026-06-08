@@ -1,5 +1,5 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import {
   getProduct,
@@ -8,6 +8,7 @@ import {
   type Product,
 } from "@/data/products";
 import { useCart } from "@/stores/cart";
+import { useWishlist } from "@/stores/wishlist";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeIn } from "@/components/FadeIn";
 import { VirtualFittingRoom } from "@/components/VirtualFittingRoom";
@@ -74,9 +75,16 @@ function ProductPage() {
     related: Product[];
   };
   const addItem = useCart((s) => s.addItem);
+  const trackView = useWishlist((s) => s.trackView);
+  const toggleFav = useWishlist((s) => s.toggle);
+  const isFav = useWishlist((s) => s.favorites.includes(product.slug));
   const [size, setSize] = useState<string | null>(null);
   const [openSection, setOpenSection] = useState<string | null>("composition");
   const [fittingOpen, setFittingOpen] = useState(false);
+
+  useEffect(() => {
+    trackView(product.slug);
+  }, [product.slug, trackView]);
 
   const handleAdd = () => {
     if (!size) return;
@@ -196,6 +204,19 @@ function ProductPage() {
                 <span className="h-[6px] w-[6px] rounded-full bg-olive" />
                 Experimentar virtualmente
               </button>
+
+              <button
+                onClick={() => toggleFav(product.slug)}
+                className="mt-3 flex w-full items-center justify-center gap-3 border border-border py-4 text-[11px] font-medium uppercase tracking-[0.22em] transition-colors hover:border-foreground"
+              >
+                {isFav ? "✦ Salvo nos favoritos" : "✦ Salvar nos favoritos"}
+              </button>
+
+              {(product.stock[size ?? ""] ?? 0) === 0 && size && (
+                <button className="mt-3 flex w-full items-center justify-center gap-3 border border-border py-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground hover:border-foreground">
+                  Avisar quando voltar
+                </button>
+              )}
 
               <div className="mt-8 border-y border-border py-5">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-olive">
