@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import heroImg from "@/assets/hero.jpg";
 import lifestyleImg from "@/assets/lifestyle.jpg";
-import { collections } from "@/data/collections";
+import { categoryCollections, editorialCollections } from "@/data/collections";
 import { products } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeIn } from "@/components/FadeIn";
@@ -40,6 +40,15 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const featured = products.slice(0, 6);
+  const lookPieces = [
+    "jaqueta-bomber-oliva",
+    "camiseta-essencial-preta",
+    "calca-chino-preta",
+    "tenis-minimalista-branco",
+  ]
+    .map((s) => products.find((p) => p.slug === s))
+    .filter(Boolean) as typeof products;
+  const lookTotal = lookPieces.reduce((s, p) => s + p.price, 0);
 
   return (
     <>
@@ -136,7 +145,7 @@ function Index() {
           <FadeIn>
             <div className="flex items-end justify-between border-b border-border pb-8">
               <div>
-                <p className="eyebrow">Coleções</p>
+                <p className="eyebrow">Categorias</p>
                 <h2 className="mt-3 font-serif text-3xl md:text-5xl">
                   Selecionado pela curadoria.
                 </h2>
@@ -151,8 +160,8 @@ function Index() {
             </div>
           </FadeIn>
 
-          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-5 md:gap-x-6">
-            {collections.map((c, i) => (
+          <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-12 md:grid-cols-4 md:gap-x-6">
+            {categoryCollections.map((c, i) => (
               <FadeIn key={c.slug} delay={i * 0.08}>
                 <Link
                   to="/colecao/$slug"
@@ -177,6 +186,37 @@ function Index() {
               </FadeIn>
             ))}
           </div>
+
+          {/* Editorial Collections */}
+          <div className="mt-24 border-t border-border pt-12">
+            <p className="eyebrow">Coleções</p>
+            <h3 className="mt-3 font-serif text-3xl md:text-4xl">
+              Para cada momento.
+            </h3>
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+              {editorialCollections.map((c) => (
+                <Link
+                  key={c.slug}
+                  to="/colecao/$slug"
+                  params={{ slug: c.slug }}
+                  className="font-serif text-2xl link-underline md:text-3xl"
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Brand phrase banner */}
+      <section className="bg-ink py-24 text-background text-center md:py-40">
+        <div className="mx-auto max-w-4xl px-6">
+          <FadeIn>
+            <p className="font-serif text-5xl leading-[1.05] md:text-8xl">
+              Qualidade <em className="font-light italic">acima</em> de tendências.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
@@ -226,6 +266,61 @@ function Index() {
                 Sem excessos. Sem esforço.
               </p>
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* Monte Seu Look */}
+      <section className="bg-offwhite py-32 md:py-40">
+        <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+          <FadeIn>
+            <div className="flex items-end justify-between border-b border-border pb-8">
+              <div>
+                <p className="eyebrow">Monte seu look</p>
+                <h2 className="mt-3 font-serif text-3xl md:text-5xl">
+                  Combinação completa, um clique.
+                </h2>
+              </div>
+              <Link to="/montar-look" className="hidden md:inline-block text-[11px] uppercase tracking-[0.22em] link-underline">
+                Gerar com IA
+              </Link>
+            </div>
+          </FadeIn>
+
+          <div className="mt-14 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4 md:gap-x-6">
+            {lookPieces.map((p, i) => (
+              <FadeIn key={p.slug} delay={i * 0.06}>
+                <Link to="/produto/$slug" params={{ slug: p.slug }} className="group block">
+                  <div className="aspect-[4/5] overflow-hidden bg-bone">
+                    <img src={p.images[0]} alt={p.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-[1.04]" />
+                  </div>
+                  <p className="mt-4 font-serif text-base link-underline">{p.name}</p>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-col items-start gap-6 border-t border-border pt-8 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="eyebrow">Look completo</p>
+              <p className="mt-2 font-serif text-3xl tabular-nums">
+                {new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(lookTotal)}
+              </p>
+            </div>
+            <Link to="/montar-look" className="bg-foreground px-10 py-4 text-[11px] uppercase tracking-[0.22em] text-background">
+              Comprar Look Completo
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Brand phrase 2 */}
+      <section className="bg-bone py-24 text-center md:py-32">
+        <div className="mx-auto max-w-4xl px-6">
+          <FadeIn>
+            <p className="font-serif text-4xl leading-[1.05] md:text-7xl">
+              Menos excesso. <em className="font-light italic">Mais essência.</em>
+            </p>
           </FadeIn>
         </div>
       </section>
@@ -313,7 +408,7 @@ function Index() {
                 </Link>
                 <Link
                   to="/montar-look"
-                  className="group flex items-center justify-between gap-6 p-8 transition-colors hover:bg-background/5"
+                  className="group flex items-center justify-between gap-6 border-b border-background/15 p-8 transition-colors hover:bg-background/5"
                 >
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">
@@ -321,6 +416,22 @@ function Index() {
                     </p>
                     <p className="mt-2 font-serif text-2xl">
                       Montar look
+                    </p>
+                  </div>
+                  <span className="text-3xl text-olive transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </Link>
+                <Link
+                  to="/consultor"
+                  className="group flex items-center justify-between gap-6 p-8 transition-colors hover:bg-background/5"
+                >
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.22em] text-background/60">
+                      Consultor de Estilo
+                    </p>
+                    <p className="mt-2 font-serif text-2xl">
+                      Tamanho ideal
                     </p>
                   </div>
                   <span className="text-3xl text-olive transition-transform group-hover:translate-x-1">
