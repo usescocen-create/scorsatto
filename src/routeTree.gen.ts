@@ -9,21 +9,39 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as MontarLookRouteImport } from './routes/montar-look'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EstiloRouteImport } from './routes/estilo'
+import { Route as ConsultorRouteImport } from './routes/consultor'
 import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 import { Route as ColecaoSlugRouteImport } from './routes/colecao.$slug'
 
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MontarLookRoute = MontarLookRouteImport.update({
   id: '/montar-look',
   path: '/montar-look',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EstiloRoute = EstiloRouteImport.update({
   id: '/estilo',
   path: '/estilo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultorRoute = ConsultorRouteImport.update({
+  id: '/consultor',
+  path: '/consultor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarrinhoRoute = CarrinhoRouteImport.update({
@@ -50,16 +68,22 @@ const ColecaoSlugRoute = ColecaoSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/consultor': typeof ConsultorRoute
   '/estilo': typeof EstiloRoute
+  '/favoritos': typeof FavoritosRoute
   '/montar-look': typeof MontarLookRoute
+  '/sobre': typeof SobreRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/consultor': typeof ConsultorRoute
   '/estilo': typeof EstiloRoute
+  '/favoritos': typeof FavoritosRoute
   '/montar-look': typeof MontarLookRoute
+  '/sobre': typeof SobreRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -67,8 +91,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/carrinho': typeof CarrinhoRoute
+  '/consultor': typeof ConsultorRoute
   '/estilo': typeof EstiloRoute
+  '/favoritos': typeof FavoritosRoute
   '/montar-look': typeof MontarLookRoute
+  '/sobre': typeof SobreRoute
   '/colecao/$slug': typeof ColecaoSlugRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
@@ -77,24 +104,33 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/carrinho'
+    | '/consultor'
     | '/estilo'
+    | '/favoritos'
     | '/montar-look'
+    | '/sobre'
     | '/colecao/$slug'
     | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/carrinho'
+    | '/consultor'
     | '/estilo'
+    | '/favoritos'
     | '/montar-look'
+    | '/sobre'
     | '/colecao/$slug'
     | '/produto/$slug'
   id:
     | '__root__'
     | '/'
     | '/carrinho'
+    | '/consultor'
     | '/estilo'
+    | '/favoritos'
     | '/montar-look'
+    | '/sobre'
     | '/colecao/$slug'
     | '/produto/$slug'
   fileRoutesById: FileRoutesById
@@ -102,14 +138,24 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CarrinhoRoute: typeof CarrinhoRoute
+  ConsultorRoute: typeof ConsultorRoute
   EstiloRoute: typeof EstiloRoute
+  FavoritosRoute: typeof FavoritosRoute
   MontarLookRoute: typeof MontarLookRoute
+  SobreRoute: typeof SobreRoute
   ColecaoSlugRoute: typeof ColecaoSlugRoute
   ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/montar-look': {
       id: '/montar-look'
       path: '/montar-look'
@@ -117,11 +163,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MontarLookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/estilo': {
       id: '/estilo'
       path: '/estilo'
       fullPath: '/estilo'
       preLoaderRoute: typeof EstiloRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consultor': {
+      id: '/consultor'
+      path: '/consultor'
+      fullPath: '/consultor'
+      preLoaderRoute: typeof ConsultorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/carrinho': {
@@ -158,11 +218,24 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CarrinhoRoute: CarrinhoRoute,
+  ConsultorRoute: ConsultorRoute,
   EstiloRoute: EstiloRoute,
+  FavoritosRoute: FavoritosRoute,
   MontarLookRoute: MontarLookRoute,
+  SobreRoute: SobreRoute,
   ColecaoSlugRoute: ColecaoSlugRoute,
   ProdutoSlugRoute: ProdutoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
