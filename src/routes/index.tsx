@@ -443,6 +443,82 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* Prova social */}
+      <section className="bg-background py-32 md:py-40">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10">
+          <FadeIn>
+            <div className="border-b border-border pb-8">
+              <p className="eyebrow">Prova social</p>
+              <h2 className="mt-3 font-serif text-3xl md:text-5xl">
+                O que nossos clientes dizem.
+              </h2>
+            </div>
+          </FadeIn>
+          <div className="mt-16 grid gap-12 md:grid-cols-3 md:gap-10">
+            {[
+              {
+                quote:
+                  "Qualidade impecável. Vesti a camiseta essencial e entendi a diferença que um básico bem feito faz.",
+                name: "Rafael M.",
+                city: "São Paulo",
+              },
+              {
+                quote:
+                  "Atendimento de marca de luxo, peças que duram. A SCORSATTO virou meu guarda-roupa quase inteiro.",
+                name: "Henrique B.",
+                city: "Curitiba",
+              },
+              {
+                quote:
+                  "Modelagem perfeita. Tudo combina com tudo. É o conceito de quiet luxury feito no Brasil.",
+                name: "Eduardo L.",
+                city: "Rio de Janeiro",
+              },
+            ].map((t, i) => (
+              <FadeIn key={t.name} delay={i * 0.08}>
+                <figure className="flex h-full flex-col">
+                  <p className="text-olive text-2xl leading-none">“</p>
+                  <blockquote className="mt-4 font-serif text-xl leading-snug md:text-2xl">
+                    {t.quote}
+                  </blockquote>
+                  <figcaption className="mt-8 border-t border-border pt-5 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                    {t.name} · {t.city}
+                  </figcaption>
+                </figure>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Confiança */}
+      <section className="bg-bone py-24 md:py-32">
+        <div className="mx-auto max-w-[1400px] px-6 md:px-10">
+          <FadeIn>
+            <div className="text-center">
+              <p className="eyebrow">Confiança</p>
+              <h2 className="mt-4 font-serif text-3xl md:text-5xl">
+                Compre com <em className="font-light italic">segurança.</em>
+              </h2>
+            </div>
+          </FadeIn>
+          <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden border border-border bg-border md:grid-cols-4">
+            {[
+              { t: "Pagamento Seguro", d: "Criptografia ponta-a-ponta." },
+              { t: "Atendimento Exclusivo", d: "Suporte humano dedicado." },
+              { t: "Entrega Nacional", d: "Para todo o Brasil." },
+              { t: "Troca Facilitada", d: "Até 30 dias, sem burocracia." },
+            ].map((item) => (
+              <div key={item.t} className="bg-bone p-8 text-center md:p-10">
+                <p className="font-serif text-xl text-olive">✓</p>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.22em]">{item.t}</p>
+                <p className="mt-3 text-xs text-muted-foreground">{item.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }
