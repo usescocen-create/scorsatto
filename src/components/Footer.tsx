@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/scorsatto-logo.asset.json";
 
 export function Footer() {
   return (
@@ -77,7 +76,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-24 border-t border-background/10 pt-10">
-          <img src={logoAsset.url} alt="SCORSATTO" className="h-8 w-auto opacity-60 brightness-0 invert" />
+          <p className="font-serif text-2xl tracking-[0.4em] uppercase text-background/80">Scorsatto</p>
           <div className="mt-10 flex flex-col gap-4 text-[11px] uppercase tracking-[0.18em] text-background/40 md:flex-row md:items-center md:justify-between">
             <p>© {new Date().getFullYear()} SCORSATTO. Todos os direitos reservados.</p>
             <p>O essencial, bem feito.</p>

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { ShoppingBag, Menu, X, Heart } from "lucide-react";
 import { useCart, selectCartCount } from "@/stores/cart";
 import { categoryCollections, editorialCollections } from "@/data/collections";
-import logoAsset from "@/assets/scorsatto-logo.asset.json";
 
 export function Header() {
   const open = useCart((s) => s.open);
@@ -40,8 +39,10 @@ export function Header() {
           </Link>
         </nav>
 
-        <Link to="/" className="shrink-0">
-          <img src={logoAsset.url} alt="SCORSATTO" className="h-6 w-auto md:h-7" />
+        <Link to="/" aria-label="SCORSATTO" className="shrink-0">
+          <span className="font-serif text-xl md:text-2xl tracking-[0.32em] uppercase text-foreground select-none">
+            Scorsatto
+          </span>
         </Link>
 
         <div className="flex items-center gap-1">
@@ -62,7 +63,7 @@ export function Header() {
       {menuOpen && (
         <div className="fixed inset-0 z-50 overflow-y-auto bg-offwhite md:hidden">
           <div className="flex h-16 items-center justify-between px-6">
-            <img src={logoAsset.url} alt="SCORSATTO" className="h-6 w-auto" />
+            <span className="font-serif text-xl tracking-[0.32em] uppercase">Scorsatto</span>
             <button onClick={() => setMenuOpen(false)} className="-mr-2 p-2" aria-label="Fechar menu">
               <X className="h-5 w-5" strokeWidth={1.2} />
             </button>
